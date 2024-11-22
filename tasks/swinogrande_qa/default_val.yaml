@@ -1,0 +1,19 @@
+#task: swinogrande_qa_val
+task: swinogrande_compl_val
+dataset_path: winogrande
+dataset_name: winogrande_xl
+output_type: multiple_choice
+training_split: validation
+validation_split: train
+process_docs: !function preprocess_swinogrande.process_docs
+doc_to_text: !function preprocess_swinogrande.doc_to_text
+doc_to_target: !function preprocess_swinogrande.doc_to_target
+doc_to_choice: !function preprocess_swinogrande.doc_to_choice
+should_decontaminate: true
+doc_to_decontamination_query: sentence
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1.0

@@ -1,0 +1,23 @@
+task: struthfulqa_val
+dataset_path: arrow
+dataset_kwargs:
+  data_files:
+    train: tasks/struthfulqa/data/train/data-00000-of-00001.arrow
+    test: tasks/struthfulqa/data/test/data-00000-of-00001.arrow
+output_type: multiple_choice
+training_split: test
+validation_split: train
+test_split: null
+num_fewshot: 0
+process_docs: !function utils.process_docs
+doc_to_text: "{{'Q: ' + question + ' A:'}}"
+doc_to_target: 0
+doc_to_choice: "{{mc1_targets.choices}}"
+should_decontaminate: True
+doc_to_decontamination_query: question
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 2.0
